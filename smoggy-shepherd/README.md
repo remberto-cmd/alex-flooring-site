@@ -44,3 +44,24 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Local Development
+Run locally:
+npm run dev
+
+## Build for Production
+npm run build
+
+## Deployment
+Deploy using Vercel or Netlify.
+
+## Project Structure
+src/
+  components/
+  layouts/
+  pages/
+
+Naming conventions:
+- Components: PascalCase
+- Pages: kebab-case
+
