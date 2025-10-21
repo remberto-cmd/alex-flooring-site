@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { portfolioServices, type PortfolioService } from '../../data/portfolio';
+
+export function getStaticPaths() {
+	return portfolioServices.map((service) => ({ params: { service: service.slug } }));
+}
+
+const serviceSlug = (Astro.params?.service || '') as string;
+const current: PortfolioService | undefined = portfolioServices.find((s) => s.slug === serviceSlug);
+
+if (!current) {
+	throw new Error(`Service not found: ${serviceSlug}`);
+}
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>{current.seoTitle}</title>
+		<meta name="description" content={current.seoDescription} />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+	</Fragment>
+
+	<main id="main-content" class="bg-neutral">
+		<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
+			<nav aria-label="Breadcrumb" class="text-sm text-primary/80">
+				<a href="/" class="hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Home</a>
+				<span aria-hidden="true" class="mx-2">/</span>
+				<a href="/portfolio" class="hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Portfolio</a>
+				<span aria-hidden="true" class="mx-2">/</span>
+				<span aria-current="page" class="font-medium">{current.title}</span>
+			</nav>
+
+			<h1 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-primary">{current.title}</h1>
+			<p class="mt-3 max-w-2xl text-base sm:text-lg text-primary/80">{current.blurb}</p>
+
+			{current.heroImage && (
+				<div class="mt-8 overflow-hidden rounded-lg border border-primary/10 bg-primary/5">
+					<a href={current.heroImage} class="glightbox block" data-gallery={serviceSlug} data-title={`${current.title} — Featured`} data-description="Featured project photo">
+						<img src={current.heroImage} alt={`${current.title} featured project`} loading="lazy" decoding="async" class="h-64 w-full object-cover sm:h-80 md:h-96" />
+					</a>
+				</div>
+			)}
+
+			<div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{current.items.map((item) => (
+					<article class="group rounded-lg border border-primary/10 bg-neutral shadow-sm overflow-hidden transition duration-200 hover:shadow-md hover:-translate-y-0.5">
+						<div class="relative w-full pb-[66%] overflow-hidden bg-primary/5">
+							<a href={item.src} class="glightbox absolute inset-0 block" data-gallery={serviceSlug} data-title={`${item.title} — ${item.location}`} data-description={item.description} aria-label={`Open full image for ${item.title}`}>
+								<img src={item.src} alt={item.alt} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+							</a>
+						</div>
+						<div class="p-5">
+							<h2 class="text-xl font-bold tracking-tight text-primary">{item.title}</h2>
+							<p class="mt-1 text-sm text-primary/70">{item.location}</p>
+							<p class="mt-3 text-primary/80">{item.description}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<script>
+	// @ts-nocheck
+	document.addEventListener('DOMContentLoaded', () => {
+		if (typeof GLightbox !== 'undefined') {
+			GLightbox({
+				selector: '.glightbox',
+				touchNavigation: true,
+				loop: true,
+				openEffect: 'zoom',
+				closeEffect: 'zoom',
+			});
+		}
+	});
+</script>
