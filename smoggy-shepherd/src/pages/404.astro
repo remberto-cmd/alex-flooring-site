@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>Page not found | Alex Flooring & Carpentry LLC</title>
+		<meta name="robots" content="noindex" />
+	</Fragment>
+
+	<main id="main-content">
+		<section aria-labelledby="not-found-heading" class="relative isolate overflow-hidden bg-primary">
+			<div class="absolute inset-0 -z-10 opacity-10">
+				<img src="/logo3.svg" alt="" class="h-full w-full object-cover" loading="eager" decoding="async" />
+			</div>
+			<div class="mx-auto max-w-7xl px-4 py-20 sm:py-24 md:py-28 lg:py-32 sm:px-6 lg:px-8">
+				<div class="max-w-2xl">
+					<img src="/logo3.svg" alt="Alex Flooring & Carpentry LLC logo" class="h-10 w-auto mb-6" width="160" height="40" loading="eager" decoding="async" />
+					<h1 id="not-found-heading" class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral">
+						Page not found.
+					</h1>
+					<p class="mt-4 text-base sm:text-lg md:text-xl text-neutral/90">
+						The page you’re looking for doesn’t exist or may have moved. Use the links below to get back on track.
+					</p>
+					<div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
+						<a href="/" class="inline-flex items-center justify-center rounded-md bg-neutral text-primary px-6 py-3 text-base font-semibold shadow-sm hover:bg-neutral/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-label="Return to the homepage">
+							Return Home
+							<svg aria-hidden="true" class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 11H4a1 1 0 01-.117-1.993L4 9h9.585l-3.292-3.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+							</svg>
+						</a>
+						<a href="/contact" class="inline-flex items-center justify-center rounded-md border border-accent text-neutral px-6 py-3 text-base font-semibold hover:bg-primary/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-label="Go to the Contact page">
+							Contact Us
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+

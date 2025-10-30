@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props as { entry: import('astro:content').CollectionEntry<'blog'> };
+const { Content } = await entry.render();
+
+function formatDate(date: Date) {
+	return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>{entry.data.title} | Alex Flooring & Carpentry LLC</title>
+		<meta name="description" content={entry.data.description} />
+	</Fragment>
+
+	<article class="bg-neutral text-primary">
+		<section class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10">
+			<header class="mb-8">
+				<p class="text-sm text-primary/70">{formatDate(entry.data.date)}{entry.data.author ? ` • ${entry.data.author}` : ''}</p>
+				<h1 class="mt-1 text-3xl sm:text-4xl font-extrabold">{entry.data.title}</h1>
+				<p class="mt-2 text-primary/80">{entry.data.description}</p>
+			</header>
+
+			<div class="space-y-5 leading-7 text-primary/90">
+				<Content />
+			</div>
+
+			<footer class="mt-10 border-t border-primary/10 pt-6">
+				<a href="/blog" class="inline-flex items-center rounded-md border border-accent px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Back to Blog</a>
+			</footer>
+		</section>
+	</article>
+</Layout>
+
+

@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>Terms & Conditions | Alex Flooring & Carpentry LLC</title>
+		<meta name="description" content="Terms and conditions for using services from Alex Flooring & Carpentry LLC." />
+	</Fragment>
+
+	<main id="main-content" class="bg-neutral text-primary">
+		<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
+			<h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">Terms & Conditions</h1>
+			<p class="mt-3 text-primary/80">Last updated: {new Date().toLocaleDateString('en-US')}</p>
+
+			<section class="mt-8" aria-labelledby="acceptance-heading">
+				<h2 id="acceptance-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Acceptance of Terms</h2>
+				<p class="mt-3 text-primary/80">
+					By contacting us, requesting an estimate, or engaging our services, you agree to these Terms & Conditions.
+				</p>
+			</section>
+
+			<section class="mt-8" aria-labelledby="contact-info-heading">
+				<h2 id="contact-info-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Company Contact Information</h2>
+				<address class="not-italic mt-3 text-primary/80">
+					Email: <a href="mailto:alex@alexflooring.us" class="underline decoration-accent hover:opacity-90">alex@alexflooring.us</a>,
+					<a href="mailto:remberto@alexflooring.us" class="underline decoration-accent hover:opacity-90">remberto@alexflooring.us</a><br />
+					Phone: (703) 499-0230<br />
+					Address: Dumfries, VA 22025
+				</address>
+			</section>
+
+			<section class="mt-8" aria-labelledby="forms-heading">
+				<h2 id="forms-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Form Submissions</h2>
+				<p class="mt-3 text-primary/80">
+					When you submit a form on our website, the information you provide may be stored and used to contact you about your request and our services. Please refer to our <a href="/privacy-policy" class="underline decoration-accent underline-offset-4 hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Privacy Policy</a> for details.
+				</p>
+			</section>
+
+			<section class="mt-8" aria-labelledby="estimates-heading">
+				<h2 id="estimates-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Estimates, Scheduling & Payment</h2>
+				<ul class="mt-3 list-disc pl-6 text-primary/80">
+					<li>Estimates are based on information available at the time and may be revised upon inspection.</li>
+					<li>Scheduling is subject to availability and weather or site conditions.</li>
+					<li>Payment terms will be communicated in your estimate or invoice.</li>
+				</ul>
+			</section>
+
+			<section class="mt-8" aria-labelledby="warranty-heading">
+				<h2 id="warranty-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Materials & Warranty</h2>
+				<p class="mt-3 text-primary/80">
+					Manufacturer warranties apply where applicable. Workmanship details and any guarantees will be outlined in your agreement or estimate.
+				</p>
+			</section>
+
+			<section class="mt-8" aria-labelledby="liability-heading">
+				<h2 id="liability-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Limitation of Liability</h2>
+				<p class="mt-3 text-primary/80">
+					To the fullest extent permitted by law, we are not liable for indirect, incidental, or consequential damages arising from use of our website or services.
+				</p>
+			</section>
+
+			<section class="mt-8" aria-labelledby="changes-heading">
+				<h2 id="changes-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Changes to These Terms</h2>
+				<p class="mt-3 text-primary/80">
+					We may update these Terms & Conditions from time to time. Updates are effective upon posting to this page.
+				</p>
+			</section>
+		</section>
+	</main>
+</Layout>
+
+

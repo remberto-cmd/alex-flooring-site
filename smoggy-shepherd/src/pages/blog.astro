@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const pageSize = 10;
+const pagePosts = posts.slice(0, pageSize);
+
+function formatDate(date: Date) {
+	return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>Blog | Alex Flooring & Carpentry LLC</title>
+		<meta name="description" content="Tips, guides, and project highlights from Alex Flooring & Carpentry." />
+	</Fragment>
+
+	<main class="bg-neutral text-primary">
+		<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+			<header class="mb-8">
+				<h1 class="text-3xl sm:text-4xl font-extrabold">Our Blog</h1>
+				<p class="mt-2 text-base text-primary/80">Expert tips, project stories, and inspiration for your next home improvement.</p>
+			</header>
+
+			<ul role="list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{pagePosts.map((post) => (
+					<li class="rounded-lg border border-primary/10 bg-white shadow-sm hover:shadow-md transition-shadow">
+					<a href={`/blog/${post.slug}`} class="block p-5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white">
+							<h2 class="text-xl font-semibold mb-1">{post.data.title}</h2>
+							<p class="text-sm text-primary/70 mb-2">{formatDate(post.data.date)}{post.data.author ? ` • ${post.data.author}` : ''}</p>
+							<p class="text-primary/90">{post.data.description}</p>
+						</a>
+					</li>
+				))}
+			</ul>
+
+			{posts.length > pageSize && (
+				<nav class="mt-10 flex items-center justify-between" aria-label="Blog pagination">
+					<span class="text-sm text-primary/70">Page 1 of {Math.ceil(posts.length / pageSize)}</span>
+					<a href="/blog/page/2" class="inline-flex items-center rounded-md border border-accent px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+						Next
+					</a>
+				</nav>
+			)}
+		</section>
+	</main>
+</Layout>
+
+

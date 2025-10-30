@@ -41,6 +41,24 @@ import "../styles/global.css";
 	</head>
 	<body>
 		<slot />
+
+		<footer role="contentinfo" aria-label="Site footer" class="bg-primary text-neutral">
+			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+				<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+					<p class="text-sm">© {new Date().getFullYear()} Alex Flooring & Carpentry LLC</p>
+					<nav aria-label="Footer navigation">
+						<ul class="flex flex-wrap items-center gap-4">
+							<li>
+								<a href="/privacy-policy" class="underline underline-offset-4 decoration-accent hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Privacy Policy</a>
+							</li>
+							<li>
+								<a href="/terms-and-conditions" class="underline underline-offset-4 decoration-accent hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Terms & Conditions</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>
 
