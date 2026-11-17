@@ -18,13 +18,9 @@ function formatDate(date: Date) {
 }
 ---
 
-<Layout>
-	<Fragment slot="head">
-		<title>{entry.data.title} | Alex Flooring & Carpentry LLC</title>
-		<meta name="description" content={entry.data.description} />
-	</Fragment>
+<Layout title={`${entry.data.title} | Alex Flooring & Carpentry LLC`} description={entry.data.description}>
 
-	<article class="bg-neutral text-primary">
+	<main id="main-content" class="bg-neutral text-primary">
 		<section class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10">
 			<header class="mb-8">
 				<p class="text-sm text-primary/70">{formatDate(entry.data.date)}{entry.data.author ? ` • ${entry.data.author}` : ''}</p>
@@ -40,7 +36,7 @@ function formatDate(date: Date) {
 				<a href="/blog" class="inline-flex items-center rounded-md border border-accent px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Back to Blog</a>
 			</footer>
 		</section>
-	</article>
+	</main>
 </Layout>
 
 
