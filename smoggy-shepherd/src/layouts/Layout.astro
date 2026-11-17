@@ -1,5 +1,42 @@
 ---
 import "../styles/global.css";
+interface Props {
+	title?: string;
+	description?: string;
+}
+const {
+	title = 'Alex Flooring & Carpentry LLC',
+	description = 'Flooring, remodeling, and carpentry services in Dumfries and Northern Virginia.',
+} = Astro.props;
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site);
+const image = new URL('/logo2.webp', site);
+const navigation = [
+	{ href: '/', label: 'Home' },
+	{ href: '/services', label: 'Services' },
+	{ href: '/portfolio', label: 'Our Work' },
+	{ href: '/reviews', label: 'Reviews' },
+	{ href: '/blog', label: 'Blog' },
+	{ href: '/contact', label: 'Contact' },
+];
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const businessSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'LocalBusiness',
+	name: 'Alex Flooring & Carpentry LLC',
+	image: image.href,
+	url: site.href,
+	telephone: '+1-703-928-8331',
+	priceRange: '$$',
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Dumfries',
+		addressRegion: 'VA',
+		postalCode: '22025',
+		addressCountry: 'US',
+	},
+	openingHours: 'Mo-Sa 07:00-17:00',
+};
 ---
 
 <!doctype html>
@@ -7,39 +44,43 @@ import "../styles/global.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/logo1 .png" />
+		<link rel="icon" type="image/webp" href="/logo2.webp" />
 		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="canonical" href={canonical} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical.href} />
+		<meta property="og:image" content={image.href} />
+		<meta property="og:image:alt" content="Alex Flooring & Carpentry LLC logo" />
+		<meta property="og:type" content="website" />
 		<slot name="head" />
 
 		<meta name="generator" content={Astro.generator} />
-		<title>Alex Flooring & Carpentry LLC</title>
-		<meta property="og:title" content="Alex Flooring & Carpentry LLC" />
-		<meta property="og:description" content="Expert flooring and carpentry services in Virginia." />
-		<meta property="og:image" content ="/logo2.jpg">
-		<meta property="og:type" content="website"/>
-		<script type="application/ld+json">
-			{
-			  "@context": "https://schema.org",
-			  "@type": "LocalBusiness",
-			  "name": "Alex Flooring & Carpentry LLC",
-			  "image": "https://alex-flooring-site.vercel.app/logo2.jpg",
-			  "url": "https://alex-flooring-site.vercel.app",
-			  "telephone": "+1-703-928-8331",
-			  "priceRange": "$$",
-			  "address": {
-				"@type": "PostalAddress",
-				"streetAddress": "Dumfries, VA",
-				"addressLocality": "Dumfries",
-				"addressRegion": "VA",
-				"postalCode": "22025",
-				"addressCountry": "US"
-			  },
-			  "openingHours": "Mo-Sa 07:00-17:00"
-			}
-			</script>
+		<script type="application/ld+json" set:html={JSON.stringify(businessSchema).replace(/</g, '\\u003c')} />
 			
 	</head>
-	<body>
+	<body class="bg-neutral text-primary">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:block focus:p-4">Skip to content</a>
+		<header class="border-b border-primary/10 bg-neutral">
+			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+				<div class="flex flex-wrap items-center justify-between gap-4">
+					<a href="/" aria-label="Alex Flooring & Carpentry home">
+						<img src="/logo3.svg" alt="Alex Flooring & Carpentry LLC" width="160" height="53" class="w-40 h-auto" />
+					</a>
+					<a href="tel:+17039288331" class="lg:hidden font-semibold underline underline-offset-4">703-928-8331</a>
+				</div>
+				<nav aria-label="Main navigation">
+					<ul class="flex flex-wrap gap-x-4 gap-y-1">
+						{navigation.map(({ href, label }) => (
+							<li><a href={href} aria-current={pathname === href ? 'page' : undefined} class:list={['inline-flex min-h-11 items-center font-medium underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary', { underline: pathname === href }]}>{label}</a></li>
+						))}
+					</ul>
+				</nav>
+				<a href="tel:+17039288331" class="hidden lg:inline-flex font-semibold underline underline-offset-4">703-928-8331</a>
+			</div>
+		</header>
 		<slot />
 
 		<footer role="contentinfo" aria-label="Site footer" class="bg-primary text-neutral">

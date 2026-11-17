@@ -15,11 +15,7 @@ const GOOGLE_MAPS_API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY || '';
 const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-intake';
 ---
 
-<Layout>
-	<Fragment slot="head">
-		<title>Contact | Alex Flooring & Carpentry LLC</title>
-		<meta name="description" content="Contact Alex Flooring & Carpentry LLC for estimates and questions. Serving Northern Virginia." />
-	</Fragment>
+<Layout title="Contact | Alex Flooring & Carpentry LLC" description="Contact Alex Flooring & Carpentry LLC for estimates and questions. Serving Northern Virginia.">
 
 	<main id="main-content" class="bg-neutral">
 		<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
@@ -59,51 +55,52 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 				</div>
 
 				<div class="lg:col-span-3">
-					<div id="form-banner" class="hidden mb-6 rounded-md p-4 text-sm" role="status" aria-live="polite"></div>
+					<div id="form-banner" class="hidden mb-6 rounded-md p-4 text-sm" role="status" aria-live="polite" tabindex="-1"></div>
+					<noscript><p class="mb-6">Please enable JavaScript to send an inquiry, or <a href="tel:+17039288331" class="underline">call 703-928-8331</a>.</p></noscript>
 
 					<form id="contact-form" novalidate class="rounded-lg border border-primary/10 bg-neutral shadow-sm p-6 grid grid-cols-1 gap-6" data-webhook-url={WEBHOOK_URL} data-google-key={GOOGLE_MAPS_API_KEY}>
 						<!-- Name -->
 						<div>
 							<label for="name" class="block text-sm font-medium text-primary">Name<span class="text-red-600"> *</span></label>
-							<input id="name" name="name" type="text" autocomplete="name" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="John Doe" />
+							<input id="name" aria-describedby="error-name" name="name" type="text" autocomplete="name" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="John Doe" />
 							<p id="error-name" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
 						<!-- Phone -->
 						<div>
 							<label for="phone" class="block text-sm font-medium text-primary">Phone<span class="text-red-600"> *</span></label>
-							<input id="phone" name="phone" inputmode="tel" autocomplete="tel" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="(703) 555-1234" />
+							<input id="phone" aria-describedby="error-phone" name="phone" inputmode="tel" autocomplete="tel" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="(703) 555-1234" />
 							<p id="error-phone" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
 						<!-- Email -->
 						<div>
 							<label for="email" class="block text-sm font-medium text-primary">Email<span class="text-red-600"> *</span></label>
-							<input id="email" name="email" type="email" inputmode="email" autocomplete="email" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="john@example.com" />
+							<input id="email" aria-describedby="error-email" name="email" type="email" inputmode="email" autocomplete="email" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="john@example.com" />
 							<p id="error-email" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
 						<!-- Job Site Address (Google Places) -->
 						<div>
 							<label for="job-site-address" class="block text-sm font-medium text-primary">Job Site Address<span class="text-red-600"> *</span></label>
-							<input id="job-site-address" name="job_site_address" type="text" autocomplete="street-address" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="Start typing address..." />
+							<input id="job-site-address" aria-describedby="error-job-site-address" name="job_site_address" type="text" autocomplete="street-address" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="Start typing address..." />
 							<input id="job-site-address-place-id" type="hidden" />
 							<input id="job-site-address-formatted" type="hidden" />
-							<p class="mt-1 text-xs text-primary/60">Autocomplete is restricted to U.S. addresses. Please select a suggestion.</p>
+							<p class="mt-1 text-xs text-primary/60">Enter the full job address, including city, state, and ZIP. You can type it manually or select a suggestion.</p>
 							<p id="error-job-site-address" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
 						<!-- Preferred Date -->
 						<div>
 							<label for="preferred-date" class="block text-sm font-medium text-primary">Preferred Date<span class="text-red-600"> *</span></label>
-							<input id="preferred-date" name="preferred_date" type="date" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" />
+							<input id="preferred-date" aria-describedby="error-preferred-date" name="preferred_date" type="date" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" />
 							<p id="error-preferred-date" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
 						<!-- Preferred Time -->
 						<div>
 							<label for="preferred-time" class="block text-sm font-medium text-primary">Preferred Time<span class="text-red-600"> *</span></label>
-							<select id="preferred-time" name="preferred_time" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary focus:border-accent focus:ring-2 focus:ring-accent">
+							<select id="preferred-time" aria-describedby="error-preferred-time" name="preferred_time" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary focus:border-accent focus:ring-2 focus:ring-accent">
 								<option value="">Select a time</option>
 							</select>
 							<p id="error-preferred-time" class="mt-1 text-sm text-red-600 hidden"></p>
@@ -128,13 +125,13 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 						<!-- Message -->
 						<div>
 							<label for="message" class="block text-sm font-medium text-primary">Message<span class="text-red-600"> *</span></label>
-							<textarea id="message" name="message" rows="5" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="Tell us about your project..." ></textarea>
+							<textarea id="message" aria-describedby="error-message" name="message" rows="5" autocomplete="off" required class="mt-2 block w-full rounded-md border border-primary/20 px-3 py-2 text-primary placeholder-primary/40 focus:border-accent focus:ring-2 focus:ring-accent" placeholder="Tell us about your project..." ></textarea>
 							<p id="error-message" class="mt-1 text-sm text-red-600 hidden"></p>
 						</div>
 
-						<div class="flex items-center justify-between gap-4">
-							<p class="text-sm text-primary/70"><span class="text-red-600">*</span> Required fields</p>
-							<button id="submit-btn" type="submit" class="inline-flex items-center justify-center rounded-md bg-primary text-neutral px-6 py-3 text-base font-semibold shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60 disabled:cursor-not-allowed">Send Message</button>
+						<div class="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
+							<p class="text-sm text-primary/70"><span class="text-red-600">*</span> Required fields. Dates and times are requests, subject to confirmation.</p>
+							<button id="submit-btn" type="submit" disabled class="inline-flex items-center justify-center rounded-md bg-primary text-neutral px-6 py-3 text-base font-semibold shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60 disabled:cursor-not-allowed">Send Message</button>
 						</div>
 					</form>
 				</div>
@@ -193,7 +190,8 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
 		function formatPhone(value) {
-			const digits = value.replace(/\D/g, '').slice(0, 10);
+			const raw = value.replace(/\D/g, '');
+			const digits = (raw.length === 11 && raw.startsWith('1') ? raw.slice(1) : raw).slice(0, 10);
 			const len = digits.length;
 			if (len === 0) return '';
 			if (len < 4) return `(${digits}`;
@@ -274,7 +272,17 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 
 		// Google Places Autocomplete (US only), requires API key
 		const GOOGLE_KEY = form.getAttribute('data-google-key') || '';
-		let autocompleteReady = false;
+		// Autocomplete is optional; manual addresses always remain usable.
+		let selectedAddressText = '';
+		function clearAddressSelection() {
+			addrPlaceId.value = '';
+			addrFormatted.value = '';
+			selectedAddressText = '';
+		}
+		addrInput.addEventListener('input', clearAddressSelection);
+		addrInput.addEventListener('change', () => {
+			if (addrInput.value.trim() !== selectedAddressText) clearAddressSelection();
+		});
 		window.initAddressAutocomplete = function initAddressAutocomplete() {
 			try {
 				// @ts-ignore
@@ -288,11 +296,10 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 					const place = autocomplete.getPlace();
 					addrPlaceId.value = place?.place_id || '';
 					addrFormatted.value = place?.formatted_address || '';
-					addrInput.dataset.selected = place?.place_id ? 'true' : 'false';
+					selectedAddressText = addrInput.value.trim();
 				});
-				autocompleteReady = true;
 			} catch (e) {
-				autocompleteReady = false;
+				clearAddressSelection();
 			}
 		};
 		if (GOOGLE_KEY) {
@@ -309,6 +316,7 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 			// Name
 			if (!nameInput.value.trim()) { setError(nameInput, errorName, 'Name is required.'); valid = false; } else { setError(nameInput, errorName, ''); }
 			// Phone
+			phoneInput.value = formatPhone(phoneInput.value);
 			const phoneValue = phoneInput.value.trim();
 			if (!phoneValue) { setError(phoneInput, errorPhone, 'Phone is required.'); valid = false; }
 			else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(phoneValue)) { setError(phoneInput, errorPhone, 'Use format (###) ###-####.'); valid = false; }
@@ -318,12 +326,9 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 			if (!emailValue) { setError(emailInput, errorEmail, 'Email is required.'); valid = false; }
 			else if (!emailRegex.test(emailValue)) { setError(emailInput, errorEmail, 'Enter a valid email address.'); valid = false; }
 			else { setError(emailInput, errorEmail, ''); }
-			// Address (must select suggestion)
-			if (!GOOGLE_KEY) {
-				setError(addrInput, errorAddress, 'Address autocomplete not configured.');
-				valid = false;
-			} else if (!addrPlaceId.value || addrInput.dataset.selected !== 'true') {
-				setError(addrInput, errorAddress, 'Please select an address from suggestions.');
+			// A nonempty manual address is valid even if Google fails to load.
+			if (!addrInput.value.trim()) {
+				setError(addrInput, errorAddress, 'Enter the job site address.');
 				valid = false;
 			} else { setError(addrInput, errorAddress, ''); }
 			// Date
@@ -345,66 +350,82 @@ const WEBHOOK_URL = 'https://alexflooring.app.n8n.cloud/webhook/afc-contact-inta
 			return valid;
 		}
 
-		[nameInput, phoneInput, emailInput, addrInput, dateInput, timeSelect, /** @type {any} */(qs('message'))].forEach((el) => {
-			el.addEventListener('input', validate);
-			el.addEventListener('change', validate);
-			el.addEventListener('blur', validate);
-		});
-		Array.from(document.querySelectorAll('input[name="customer_type"]')).forEach((el) => {
-			el.addEventListener('input', validate);
-			el.addEventListener('change', validate);
-			el.addEventListener('blur', validate);
-		});
+		let attemptedSubmit = false;
+		let submitting = false;
+		form.addEventListener('input', () => { if (attemptedSubmit) validate(); });
+		form.addEventListener('change', () => { if (attemptedSubmit) validate(); });
 
-
+		function showBanner(message, isError = false) {
+			banner.textContent = message;
+			banner.className = isError
+				? 'mb-6 rounded-md p-4 text-sm bg-red-50 text-red-700 border border-red-200'
+				: 'mb-6 rounded-md p-4 text-sm bg-green-50 text-green-800 border border-green-200';
+			if (isError) {
+				const callLink = document.createElement('a');
+				callLink.href = 'tel:+17039288331';
+				callLink.textContent = 'Call 703-928-8331';
+				callLink.className = 'underline font-semibold';
+				banner.append(' ', callLink, ' for help.');
+			}
+			banner.focus();
+		}
 
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
+			if (submitting) return;
+			attemptedSubmit = true;
 			banner.className = 'hidden mb-6 rounded-md p-4 text-sm';
-			if (!validate()) return;
+			if (!validate()) {
+				const firstInvalid = form.querySelector('[aria-invalid="true"]') || form.querySelector('input[name="customer_type"]');
+				firstInvalid?.focus();
+				return;
+			}
+			submitting = true;
 			submitBtn.disabled = true;
 			submitBtn.textContent = 'Sending...';
+			form.setAttribute('aria-busy', 'true');
 
+			// Also guard against autofill or programmatic edits without input events.
+			if (addrInput.value.trim() !== selectedAddressText) clearAddressSelection();
 			const payload = {
 				name: nameInput.value.trim(),
 				phone: phoneInput.value.trim(),
 				email: emailInput.value.trim(),
 				job_site_address: {
-					formatted_address: addrFormatted.value || '',
+					formatted_address: addrFormatted.value || addrInput.value.trim(),
 					place_id: addrPlaceId.value || '',
 				},
 				preferred_date: dateInput.value,
 				preferred_time: timeSelect.value,
-				customer_type: /** @type {HTMLInputElement|null} */(document.querySelector('input[name="customer_type"]:checked'))?.value || '',
-				message: /** @type {HTMLTextAreaElement} */(qs('message')).value.trim(),
+				customer_type: document.querySelector('input[name="customer_type"]:checked')?.value || '',
+				message: qs('message').value.trim(),
 			};
 
-			console.log('Contact form payload:', payload);
+			const controller = new AbortController();
+			const timeout = setTimeout(() => controller.abort(), 20000);
 			try {
 				const res = await fetch(form.getAttribute('data-webhook-url') || '', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(payload),
+					signal: controller.signal,
 				});
-				if (res.ok) {
-					banner.textContent = 'Thank you, your request has been received.';
-					banner.className = 'mb-6 rounded-md p-4 text-sm bg-green-50 text-green-800 border border-green-200';
-					form.reset();
-					addrPlaceId.value = '';
-					addrFormatted.value = '';
-					addrInput.dataset.selected = 'false';
-				} else {
-					banner.textContent = 'Something went wrong. Please try again later.';
-					banner.className = 'mb-6 rounded-md p-4 text-sm bg-red-50 text-red-700 border border-red-200';
-				}
+				if (!res.ok) throw new Error('Inquiry request failed');
+				showBanner('Thank you, your inquiry was submitted. Your requested date and time are subject to confirmation.');
+				form.reset();
+				clearAddressSelection();
+				attemptedSubmit = false;
 			} catch (err) {
-				banner.textContent = 'Something went wrong. Please try again later.';
-				banner.className = 'mb-6 rounded-md p-4 text-sm bg-red-50 text-red-700 border border-red-200';
+				showBanner('We could not confirm your submission. Your entries are still here. Please check with us before submitting again.', true);
 			} finally {
+				clearTimeout(timeout);
+				submitting = false;
+				form.removeAttribute('aria-busy');
 				submitBtn.disabled = false;
 				submitBtn.textContent = 'Send Message';
 			}
 		});
+		submitBtn.disabled = false;
 	</script>
 
 </Layout>
