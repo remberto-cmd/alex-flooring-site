@@ -121,7 +121,7 @@ Load more
 </div>
 </div>
 
-<script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
 </section>
 
 <script type="module">
